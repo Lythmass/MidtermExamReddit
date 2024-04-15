@@ -43,6 +43,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseMiddleware<GlobalExceptionHandling>();
+app.MapGet("/throw", () =>
+{
+    throw new Exception("Hello, this is a test error for global exception handling");
+});
 
 app.UseHttpsRedirection();
 app.UseCors();
