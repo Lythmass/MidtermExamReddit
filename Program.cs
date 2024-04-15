@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Reddit;
+using Reddit.Filters;
 using Reddit.Mapper;
 using Reddit.Middlewares;
 using System.Text.Json.Serialization;
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+builder.Services.AddControllers(options => options.Filters.Add<ModelValidatoinActionFilter>())
+    .ConfigureApiBehaviorOptions(options =>
 {
     options.SuppressModelStateInvalidFilter = true; 
 }).AddJsonOptions(options =>
